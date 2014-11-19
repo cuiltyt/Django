@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'track/list.css' %}" />
+
+<title>RHS Track and Field</title>
+
+<div id="top_bar">
+  <p class="page_title">Roster</p>
+</div>
+
+<hr>
+
+<body>
+  <div id="section">
+  <div id="list">
+  {% if object_list %}
+    {% for a in object_list %}
+      <ul>
+      <li>
+        <span class="small_font"> {{ a.year }} {{ a.gender }}</span>
+        <a href="{% url 'track:athlete_profile' a.id %}">{{a.first_name}} {{a.last_name}}</a>
+      </li>
+      </ul>
+    {% endfor %}
+  {% else %}
+    <p class="text"> No Results </p>
+  {% endif %}
+  </div>
+  </div>
+</body>

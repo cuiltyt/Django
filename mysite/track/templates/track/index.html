@@ -1,0 +1,40 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
+
+<title> RHS Track and Field </title>
+
+<div id="top_bar">
+  <head>
+    <p class="page_title">Roseburg Track and Field</p>
+  </head>
+</div>
+
+<body>
+
+  <div id="section">
+    <a href="/track/athletes/"><p class="heading">Athletes</p></a>
+    <form action="/track/athletes/" method="GET" id="search_bar">
+      <input type="text" name="search_term" placeholder="Search Athletes by First OR Last Name" required>
+    </form>
+  </div>
+
+  <hr>
+
+  <div id="section">
+  <p class="heading">Events</p>
+  
+  <div id="list">
+  {% if events %}
+    {% for e in events %}
+      <ul>
+      <li>
+        <a href="{% url 'track:event_profile' e.id %}">{{e.gender}} {{e.event_name}}</a>
+      </li>
+      </ul>
+    {% endfor %}
+  {% else %}
+    <p> Error Loading Events</p>
+  {% endif %}
+  </div>
+</body>

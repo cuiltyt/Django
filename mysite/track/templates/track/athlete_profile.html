@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'track/profile.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
+
+<title> RHS Track and Field </title>
+
+<div id="top_bar">
+  <head>
+      <p class="page_title">Roseburg Track and Field</p>
+  </head>
+</div>
+  
+<body>
+  <table>
+    <caption>
+      {% for a in athlete %}
+        <p class="heading">{{ a.first_name }} {{ a.last_name }}</p>
+      {% endfor %}
+    </caption>
+    <tr>
+      <th>Event</th>
+      <th>Time/Distance</th>
+      <th>Date</th>
+  {% for record in records %}
+    <tr>
+      <td><a href="{% url 'track:event_profile' record.event_name.id %}">{{ record.event_name }}</a></td>
+      <td>{{ record.time_dist }}</td>
+      <td>{{ record.date }}</td>
+      <td><a href="{% url 'track:record_update_form' pk=record.id %}">Update</a></td>
+  {% endfor %}
+  </table>
+</body>
+
+<div id="update_link">
+  {% for a in athlete %}
+    <a href="{% url 'track:record_create_form' pk=a.id%}">Add New Record</a>
+  {% endfor %}
+</div>

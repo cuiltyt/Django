@@ -1,0 +1,29 @@
+table {
+	background-color: #DADADA;
+	font-family: Arial;
+	text-align: center;
+	padding: 20px;
+	position: relative;
+	top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+}
+
+th, tr, td {
+	text-align: center;
+	padding: 10px;
+	font-size: 16px;
+	font-family: Tahoma;
+}
+
+#update_link {
+	font-family: Arial;
+	font-size: 16px;
+	padding-top: 50px;
+	font-family: Arial;
+	text-align: center;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}

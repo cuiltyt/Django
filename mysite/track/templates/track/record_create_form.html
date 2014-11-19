@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'track/create_update_form.css' %}" />
+
+
+<title> RHS Track and Field </title>
+
+<div id="top_bar">
+  <head>
+    <p class="page_title">Roseburg Track and Field</p>
+  </head>
+</div>
+
+<div id="section">
+  <form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add</button>
+  </form>
+</div>

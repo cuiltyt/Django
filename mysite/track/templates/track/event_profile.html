@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'track/profile.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
+
+<title> RHS Track and Field </title>
+
+<div id="top_bar">
+  <head>
+  {% for e in event %}
+    <p class="page_title">{{ e.get_gender_display }} {{ e.event_name }}</p>
+  {% endfor %}
+  </head>
+</div>
+
+<body>
+  <table>
+    <tr>
+      <th>Athlete</th>
+      <th>Time/Distance</th>
+      <th>Date</th>
+  {% for record in records %}
+    <tr>
+      <td>
+        <a href="{% url 'track:athlete_profile' record.athlete.id %}">{{ record.athlete }}</a></td>
+      <td>{{ record.time_dist }}</td>
+      <td>{{ record.date }}</td>
+  {% endfor %}
+  </table>
+</body>
