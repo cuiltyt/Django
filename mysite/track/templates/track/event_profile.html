@@ -15,17 +15,16 @@
 </div>
 
 <body>
+  {% for event_profile in event_profiles %}
   <table>
   <caption>
-      {% for e in event %}
-        <p class="heading">{{ e.get_gender_display }} {{ e.event_name }}</p>
-      {% endfor %}
+        <p class="heading">{{ event_profile.event }}</p>
     </caption>
     <tr>
       <th>Athlete</th>
       <th>Time/Distance</th>
       <th>Date</th>
-  {% for record in records %}
+  {% for record in event_profile.records %}
     <tr>
       <td>
         <a href="{% url 'track:athlete_profile' record.athlete.id %}">{{ record.athlete }}</a></td>
@@ -33,4 +32,5 @@
       <td>{{ record.date }}</td>
   {% endfor %}
   </table>
+  {% endfor %}
 </body>

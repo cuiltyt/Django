@@ -9,7 +9,13 @@ from django.shortcuts import render, redirect
 from track.models import Athlete, Event, Record
 
 def index(request):
-	events = Event.objects.order_by('event_name')
+	events = []
+	event_names = Event.objects.values_list('event_name', flat=True).distinct()
+	print event_names
+	for event in event_names:
+		event_number = Event.objects.filter(event_name=event).values_list('id', flat=True)[0]
+		print event_number
+		events += Event.objects.filter(pk=event_number)
 	return render(request, 'track/index.html', { 'events' : events })
  
 def AthleteList(request):
@@ -35,9 +41,17 @@ def AthleteProfile(request, athlete_id):
 
 
 def EventProfile(request, event_id):
-	event = Event.objects.filter(pk=event_id)
-	records = Record.objects.filter(event_name=event_id).order_by('time_dist')
-	return render(request, 'track/event_profile.html', { 'event' : event, 'records' : records })
+	event_profiles = []
+	
+	event_name = (Event.objects.get(pk=event_id)).event_name
+	events = Event.objects.filter(event_name=event_name)
+	
+	for event in events:
+		records = Record.objects.filter(event_name=event.id).order_by('time_dist')
+		event_profile = { 'event' : event, 'records' : records }
+		event_profiles.append(event_profile)
+	print event_profiles
+	return render(request, 'track/event_profile.html', { 'event_profiles' : event_profiles })
 
 class RecordUpdate(UpdateView):
 	model = Record

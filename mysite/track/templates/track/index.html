@@ -32,7 +32,7 @@
     {% for e in events %}
       <ul>
       <li>
-        <a href="{% url 'track:event_profile' e.id %}">{{e.gender}} {{e.event_name}}</a>
+        <a href="{% url 'track:event_profile' e.id %}">{{e.event_name}}</a>
       </li>
       </ul>
     {% endfor %}
