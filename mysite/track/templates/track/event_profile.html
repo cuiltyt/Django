@@ -6,15 +6,21 @@
 <title> RHS Track and Field </title>
 
 <div id="top_bar">
-  <head>
-  {% for e in event %}
-    <p class="page_title">{{ e.get_gender_display }} {{ e.event_name }}</p>
-  {% endfor %}
-  </head>
+  <p class="page_title">
+     Roseburg Track and Field
+    <a class="workflow" href="{% url 'admin:index' %}">Admin</a>
+    <a class="workflow" href="{% url 'track:athlete_list' %}">Roster</a>
+    <a class="workflow" href="{% url 'track:index' %}">Home</a>
+  </p>
 </div>
 
 <body>
   <table>
+  <caption>
+      {% for e in event %}
+        <p class="heading">{{ e.get_gender_display }} {{ e.event_name }}</p>
+      {% endfor %}
+    </caption>
     <tr>
       <th>Athlete</th>
       <th>Time/Distance</th>

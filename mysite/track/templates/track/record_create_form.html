@@ -7,9 +7,12 @@
 <title> RHS Track and Field </title>
 
 <div id="top_bar">
-  <head>
-    <p class="page_title">Roseburg Track and Field</p>
-  </head>
+  <p class="page_title">
+     Roseburg Track and Field
+    <a class="workflow" href="{% url 'admin:index' %}">Admin</a>
+    <a class="workflow" href="{% url 'track:athlete_list' %}">Roster</a>
+    <a class="workflow" href="{% url 'track:index' %}">Home</a>
+  </p>
 </div>
 
 <div id="section">

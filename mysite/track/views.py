@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, CreateView
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 from track.models import Athlete, Event, Record
@@ -12,22 +12,27 @@ def index(request):
 	events = Event.objects.order_by('event_name')
 	return render(request, 'track/index.html', { 'events' : events })
  
-class AthleteListView(ListView):
-	model = Athlete
-
-	def get_queryset(self):
-		if 'search_term' in self.request.GET:
-			athletes = Athlete.objects.filter(
-				Q(last_name__icontains=self.request.GET['search_term']) |
-				Q(first_name__icontains=self.request.GET['search_term']))
-			return athletes                   	
+def AthleteList(request):
+	if 'search_term' in request.GET:
+		results = Athlete.objects.filter(
+				Q(last_name__icontains=request.GET['search_term']) |
+				Q(first_name__icontains=request.GET['search_term']))
+		
+		if len(results) == 1:
+			url = reverse('track:athlete_profile', args=(results[0].id,))
+			return redirect(url)
 		else:
-			return Athlete.objects.order_by('last_name')
+			return render(request, 'track/athlete_list.html', { 'athletes' : results })
+	
+	else:
+		all = Athlete.objects.all()
+		return render(request, 'track/athlete_list.html', { 'athletes' : all })
 
 def AthleteProfile(request, athlete_id):
 	records = Record.objects.filter(athlete=athlete_id)
 	athlete = Athlete.objects.filter(pk=athlete_id)
-	return render(request, 'track/athlete_profile.html', { 'records' : records, 'athlete' : athlete }) 
+	return render(request, 'track/athlete_profile.html', { 'records' : records, 'athlete' : athlete })
+
 
 def EventProfile(request, event_id):
 	event = Event.objects.filter(pk=event_id)

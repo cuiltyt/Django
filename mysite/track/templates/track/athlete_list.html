@@ -6,16 +6,26 @@
 <title>RHS Track and Field</title>
 
 <div id="top_bar">
-  <p class="page_title">Roster</p>
+  <p class="page_title">
+     Roseburg Track and Field
+    <a class="workflow" href="{% url 'admin:index' %}">Admin</a>
+    <a class="workflow" href="{% url 'track:athlete_list' %}">Roster</a>
+    <a class="workflow" href="{% url 'track:index' %}">Home</a>
+  </p>
 </div>
 
 <hr>
 
-<body>
-  <div id="section">
+<div id="section">
+  <p class="heading">Roster</p>
+  
+  <form action="/track/athletes/" method="GET" id="search_bar">
+    <input type="text" name="search_term" placeholder="Search Athletes by First OR Last Name" required>
+  </form>
+  
   <div id="list">
-  {% if object_list %}
-    {% for a in object_list %}
+  {% if athletes %}
+    {% for a in athletes %}
       <ul>
       <li>
         <span class="small_font"> {{ a.year }} {{ a.gender }}</span>
@@ -23,9 +33,8 @@
       </li>
       </ul>
     {% endfor %}
+  </div>
   {% else %}
     <p class="text"> No Results </p>
   {% endif %}
-  </div>
-  </div>
-</body>
+</div>
