@@ -18,7 +18,7 @@
   {% for event_profile in event_profiles %}
   <table>
   <caption>
-        <p class="heading">{{ event_profile.event }}</p>
+        <p class="heading">{{ event_profile.event.get_gender_display }} {{event_profile.event.event_name }}</p>
     </caption>
     <tr>
       <th>Athlete</th>
