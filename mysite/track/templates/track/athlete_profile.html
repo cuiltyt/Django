@@ -1,43 +1,70 @@
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'track/profile.css' %}" />
-
-<title> RHS Track and Field </title>
-
-<div id="top_bar">
-  <p class="page_title">
-     Roseburg Track and Field
-    <a class="workflow" href="{% url 'admin:index' %}">Admin</a>
-    <a class="workflow" href="{% url 'track:athlete_list' %}">Roster</a>
-    <a class="workflow" href="{% url 'track:index' %}">Home</a>
-  </p>
-</div>
-
-<body>
-  <table>
-    <caption>
-      {% for a in athlete %}
-        <p class="heading">{{ a.first_name }} {{ a.last_name }}</p>
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> RHS Track and Field </title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet"
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="{% static 'track/base.css' %}" />
+      <link rel="stylesheet" type="text/css" href="{% static 'track/profile.css' %}" />
+      <link rel='stylesheet' type='text/css'
+      href='http://fonts.googleapis.com/css?family=Libre+Baskerville' >
+    </head>
+  
+  <body>
+    <div class="container">
+  	  <h1>Roseburg Track and Field</h1>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div>
+            <ul class="nav navbar-nav">
+              <li><a href="{% url 'track:index' %}"><i class="fa fa-home fa-fw"></i>Home</a></li> 
+              <li><a href="{% url 'admin:index' %}"><i class="fa fa-user fa-fw"></i>Admin</a></li>
+              <li><a href="{% url 'track:athlete_list' %}"><i class="fa fa-trophy fa-fw"></i>Roster</a></li> 
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <table class="table">
+      <caption>
+        {% for a in athlete %}
+          <h2 class="text-center">{{ a.first_name }} {{ a.last_name }}</h2>
+        {% endfor %}
+      </caption>
+      <tr>
+        <th class="text-center">Event</th>
+        <th class="text-center">Time/Distance</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">Update</th>
+      </tr>
+      {% for record in records %}
+        <tr>
+          <td class="text-center"><a href="{% url 'track:event_profile' record.event_name.id %}">{{ record.event_name }}</a></td>
+          <td class="text-center">{{ record.time_dist }}</td>
+          <td class="text-center">{{ record.date }}</td>
+          <td class="text-center">
+            <a href="{% url 'track:record_update_form' pk=record.id %}"><i class="fa fa-edit fa-fw"></i></a>
+          </td>
+        </tr>
       {% endfor %}
-    </caption>
-    <tr>
-      <th>Event</th>
-      <th>Time/Distance</th>
-      <th>Date</th>
-  {% for record in records %}
-    <tr>
-      <td><a href="{% url 'track:event_profile' record.event_name.id %}">{{ record.event_name }}</a></td>
-      <td>{{ record.time_dist }}</td>
-      <td>{{ record.date }}</td>
-      <td><a href="{% url 'track:record_update_form' pk=record.id %}">Update</a></td>
-  {% endfor %}
-  </table>
-</body>
+    </table>
+    
+    <hr>
 
-  <div id="create_link">
-    {% for a in athlete %}
-      <a href="{% url 'track:record_create_form' pk=a.id %}">+ Record</a>
-    {% endfor %}
-  </div>
+    <p class="text-center">
+      <a id="add" href="{% url 'track:athlete_create_form' %}">
+        <i class="fa fa-plus fa-fw"></i>Personal Record
+      </a>
+    </p>
+    
+    </div>
+  </body>
+</html>
+ 
 
