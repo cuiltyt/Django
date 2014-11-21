@@ -1,0 +1,62 @@
+ h1 {
+	color: #E65C00;
+	font-family: 'Libre Baskerville', serif;
+}
+
+h2 {
+	font-family: 'Libre Baskerville', serif;
+}
+
+.navbar-default {
+	background-color: #E6E6E6;
+	border-color: #E6E6E6;
+}
+
+li {
+	color: #000000;
+	font-family: 'Libre Baskerville', serif;
+}
+
+li.centered {
+	margin-left: 35%;
+	padding-bottom: 4px;
+}
+
+.col-md-4 {
+	top: 10px;
+}
+
+.form-control {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%
+}
+
+.table {
+	width: 70%;
+	position: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #000000;
+}
+
+i {
+	padding-right: 20px;
+}
+
+input {
+    font-family: FontAwesome;
+}
