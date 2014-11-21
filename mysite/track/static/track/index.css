@@ -38,6 +38,7 @@ body {
 	background-color: #DADADA;
 	font-family: Arial;
 	position: relative;
+	padding-bottom: 10px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
@@ -52,12 +53,11 @@ body {
     column-count: 3;
     columns: 3;
     position: center;
-    padding-bottom: 20px;
 }
 
 #search_bar {
 	text-align: center;
-	padding-bottom: 20px;
+	padding-bottom: 0px;
 }
 
 input {
@@ -121,6 +121,13 @@ a.workflow {
 	padding-top: 24px;
 	font-size: 16px;
 	color: #E65C00;
+}
+
+#create_link {
+	font-family: Arial;
+	font-size: 14px;
+	text-align: center;
+	padding-top: 10px;
 }
 
 

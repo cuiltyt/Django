@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'track/create_update_form.css' %}" />
+
+
+<title> RHS Track and Field </title>
+
+<div id="top_bar">
+  <p class="page_title">
+     Roseburg Track and Field
+    <a class="workflow" href="{% url 'admin:index' %}">Admin</a>
+    <a class="workflow" href="{% url 'track:athlete_list' %}">Roster</a>
+    <a class="workflow" href="{% url 'track:index' %}">Home</a>
+  </p>
+</div>
+
+<div id="section">
+  <form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add</button>
+  </form>
+</div>

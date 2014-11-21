@@ -11,10 +11,8 @@ from track.models import Athlete, Event, Record
 def index(request):
 	events = []
 	event_names = Event.objects.values_list('event_name', flat=True).distinct()
-	print event_names
 	for event in event_names:
 		event_number = Event.objects.filter(event_name=event).values_list('id', flat=True)[0]
-		print event_number
 		events += Event.objects.filter(pk=event_number)
 	return render(request, 'track/index.html', { 'events' : events })
  
@@ -50,7 +48,6 @@ def EventProfile(request, event_id):
 		records = Record.objects.filter(event_name=event.id).order_by('time_dist')
 		event_profile = { 'event' : event, 'records' : records }
 		event_profiles.append(event_profile)
-	print event_profiles
 	return render(request, 'track/event_profile.html', { 'event_profiles' : event_profiles })
 
 class RecordUpdate(UpdateView):
@@ -75,3 +72,10 @@ class RecordCreate(CreateView):
 	
 	def get_success_url(self):
 		return reverse('track:athlete_profile', kwargs={ 'athlete_id': self.get_object().id })
+		
+class AthleteCreate(CreateView):
+	model = Athlete
+	template_name_suffix = '_create_form'
+	
+	def get_success_url(self):
+		return reverse('track:athlete_list')

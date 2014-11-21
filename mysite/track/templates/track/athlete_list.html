@@ -21,6 +21,9 @@
   
   <form action="/track/athletes/" method="GET" id="search_bar">
     <input type="text" name="search_term" placeholder="Search Athletes by First OR Last Name" required>
+    <div id="create_link">
+      <a href="{% url 'track:athlete_create_form' %}">+ Athlete</a>
+    </div>
   </form>
   
   <div id="list">
