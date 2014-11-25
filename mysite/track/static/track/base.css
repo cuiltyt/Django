@@ -64,3 +64,8 @@ i {
 input {
     font-family: FontAwesome;
 }
+
+button {
+	font-family: 'Libre Baskerville', serif;
+	margin-top: 20px;
+}

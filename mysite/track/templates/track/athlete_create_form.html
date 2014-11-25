@@ -1,23 +1,40 @@
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'track/index.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'track/create_update_form.css' %}" />
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> RHS Track and Field </title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet"
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="{% static 'track/base.css' %}" />
+      <link rel='stylesheet' type='text/css'
+      href='http://fonts.googleapis.com/css?family=Libre+Baskerville' >
+    </head>
 
+  <body>
+    <div class="container">
+  	  <h1>Roseburg Track and Field</h1>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div>
+            <ul class="nav navbar-nav">
+              <li><a href="{% url 'track:index' %}"><i class="fa fa-home fa-fw"></i>Home</a></li> 
+              <li><a href="{% url 'admin:index' %}"><i class="fa fa-user fa-fw"></i>Admin</a></li>
+              <li><a href="{% url 'track:athlete_list' %}"><i class="fa fa-trophy fa-fw"></i>Roster</a></li> 
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-<title> RHS Track and Field </title>
+      <form role="form" action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+      </form>
 
-<div id="top_bar">
-  <p class="page_title">
-     Roseburg Track and Field
-    <a class="workflow" href="{% url 'admin:index' %}">Admin</a>
-    <a class="workflow" href="{% url 'track:athlete_list' %}">Roster</a>
-    <a class="workflow" href="{% url 'track:index' %}">Home</a>
-  </p>
-</div>
-
-<div id="section">
-  <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add</button>
-  </form>
-</div>
+    </div>
+  </body>
+</html>

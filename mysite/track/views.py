@@ -14,6 +14,7 @@ def index(request):
 	for event in event_names:
 		event_number = Event.objects.filter(event_name=event).values_list('id', flat=True)[0]
 		events += Event.objects.filter(pk=event_number)
+		print BASE_DIR
 	return render(request, 'track/index.html', { 'events' : events })
  
 def AthleteList(request):

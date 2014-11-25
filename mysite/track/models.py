@@ -1,4 +1,5 @@
-from django.db import models 
+from django.db import models
+import PIL
 
 class Event(models.Model):
 	def __str__(self):
